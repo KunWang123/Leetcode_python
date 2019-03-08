@@ -1,0 +1,32 @@
+"""
+执行用时 : 32 ms, 在Two Sum的Python提交中击败了74.64% 的用户
+内存消耗 : 12.5 MB, 在Two Sum的Python提交中击败了0.96% 的用户
+主要是将list元素和索引值（index）打包为元组，
+然后动态规划，前后同时移动，判断加和
+"""
+class Solution(object):
+    def twoSum(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        len_nums = len(nums)
+        list_index = [0] * len_nums
+        for i in range(len_nums):
+            list_index[i] = i
+        list_zip = zip(nums, list_index)
+        list_zip.sort()
+        start, end = 0, len_nums-1
+        tuple_1 = (0, 0)
+        tuple_2 = (0, 0)
+        while start < end:
+            tuple_1 = list_zip[start]
+            tuple_2 = list_zip[end]
+            if tuple_1[0] + tuple_2[0] == target:
+                return [tuple_1[1], tuple_2[1]]
+            elif tuple_1[0] + tuple_2[0] < target:
+                start += 1
+            else:
+                end -= 1
+
