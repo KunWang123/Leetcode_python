@@ -1,2 +1,2 @@
-# Leetcode_python
-learning python on Leetcode
+# 练习python
+learning python on Leetcode and 剑指offer
