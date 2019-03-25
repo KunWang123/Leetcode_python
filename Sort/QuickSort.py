@@ -1,4 +1,6 @@
-"快速排序算法实现"
+'''快速排序算法实现
+时间复杂度O(nlog2n)
+'''
 
 def QuickSort(arr, FirstIndex, LastIndex):
 
