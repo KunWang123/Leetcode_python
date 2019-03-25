@@ -1,0 +1,40 @@
+"""
+题目描述
+把一个数组最开始的若干个元素搬到数组的末尾，我们称之为数组的旋转。 
+输入一个非减排序的数组的一个旋转，输出旋转数组的最小元素。 
+例如数组{3,4,5,1,2}为{1,2,3,4,5}的一个旋转，该数组的最小值为1。 
+NOTE：给出的所有元素都大于0，若数组大小为0，请返回0。
+"""
+"""
+解题思路：
+改变的二分查找方法，前后各一个指针，
+mid如果属于前面递增序列则arr[start] <= arr[mid];
+mid如果属于后面递增序列则arr[mid] <= arr[end]; 
+mid = (start+end)/2
+依次迭代，直到end-start=1,则后面end指向的为最小数字
+"""
+python
+
+# -*- coding:utf-8 -*-
+class Solution:
+    def minNumberInRotateArray(self, rotateArray):
+        # write code here
+        if len(rotateArray) == 0:
+            return 0
+        min_val = 0
+        start = 0
+        end = len(rotateArray)-1
+        mid = start
+        while rotateArray[start] >= rotateArray[end]:
+            if end-start == 1:
+                mid = end
+                break
+            mid = (end + start)/2
+            if rotateArray[mid] >= rotateArray[start]:
+                start = mid
+            if rotateArray[mid] <= rotateArray[end]:
+                end = mid
+        min_val = rotateArray[mid]
+        return min_val
+        
+if 遇到011111这样数组的旋转数组101111，则二分查找无法找到中值，需要用遍历。
