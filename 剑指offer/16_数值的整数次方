@@ -1,0 +1,36 @@
+'''
+题目描述：
+给定一个double类型的浮点数base和int类型的整数exponent。求base的exponent次方。
+
+解题思路：
+进可能详尽的考虑边界情况，考虑 1.指数为负 2.底数为0；
+亮点：位运算相比于乘除法和求余运算的优点
+python的优势：无需考虑运算出界问题，做除法运算时1/x == 1.0/x
+'''
+
+# -*- coding:utf-8 -*-
+class Solution:
+    def Power(self, base, exponent):
+        # write code here
+        g_InvalidInput = False
+        if base == 0.0 and exponent < 0:
+            g_InvalidInput = True
+            return 0.0
+        absExponent = exponent
+        if exponent < 0:
+            absExponent = -exponent
+        result = self.PowerWithExponent(base, absExponent)
+        if exponent < 0:
+            result = 1.0 / result
+        return result
+
+    def PowerWithExponent(self, base, absExponent):
+        if absExponent == 0:
+            return 1
+        if absExponent == 1:
+            return base
+        result = self.PowerWithExponent(base, absExponent >> 1)  # 位运算相比于乘除法和取余运算的优点
+        result *= result
+        if absExponent & 0x1 == 1:
+            result *= base
+        return result
